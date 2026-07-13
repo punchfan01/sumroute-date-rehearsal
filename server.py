@@ -981,11 +981,9 @@ async def _search_places_for_round(
     """
     Start a new sumroute(썸루트) date rehearsal session.
     Use this first when the user wants to simulate a date course around a real meeting place.
-    This tool stores the partner personality/taste, relationship stage, and meeting place, then returns
-    the first route round. Do not call this tool until the assistant has collected all required inputs:
-    partner_gender, partner_personality_and_taste, relationship_stage, and meeting_place.
-    The assistant should roleplay the partner lightly and guide the user through realistic route choices
-    rather than asking for exact prices or private details.
+    This tool stores the partner personality/taste, relationship stage, and meeting place, then returns the first route round. 
+    Do not call this tool until the assistant has collected all required inputs: partner_gender, partner_personality_and_taste, relationship_stage, and meeting_place.
+    The assistant should roleplay the partner lightly and guide the user through realistic route choices rather than asking for exact prices or private details.
     """,
     annotations = {
         "title": "Start SumRoute Date Rehearsal",
@@ -1052,19 +1050,16 @@ def start_date(
     """
     Search real nearby places for the current sumroute(썸루트) round using Kakao Local API.
 
-    This tool is intentionally designed to reduce LLM prompt dependence. The assistant may pass
-    a short optional query, but it does not need to craft every search keyword. The MCP server
-    automatically checks the current round, selects unused category keywords from an internal
-    round-specific keyword pool, calls Kakao Local API multiple times, merges candidates, excludes
-    places already shown in this session, and ranks places by distance and round fit.
+    This tool is intentionally designed to reduce LLM prompt dependence. The assistant may pass a short optional query, but it does not need to craft every search keyword. 
+    The MCP server automatically checks the current round, selects unused category keywords from an internal round-specific keyword pool, calls Kakao Local API multiple times, merges candidates, excludes places already shown in this session, and ranks places by distance and round fit.
 
     Use this after start_date and before presenting route choices to the user.
     Optional query rule: if provided, keep it short, like '성수 브런치' or '홍대 셀프사진관'.
     Do not pass long sentences, budget details, full persona text, or many conditions.
 
-    The returned places already include server-side metadata such as source_keyword,
-    sumroute_place_score, score_reasons, distance_m, and search_meta. Present 3~4 realistic
-    choices based on these returned places. Do not invent additional places outside the tool result.
+    The returned places already include server-side metadata such as source_keyword, sumroute_place_score, score_reasons, distance_m, and search_meta. 
+    Present 3~4 realistic choices based on these returned places. 
+    Do not invent additional places outside the tool result.
     """,
     annotations={
         "title": "Search SumRoute Places",
@@ -1158,10 +1153,11 @@ async def search_nearby(
     Use this whenever the user chooses a place, activity, reply, gift style, or crisis response.
     For actual route steps, keep advance_round=True so the choice appears in the final selected course.
     For small dialogue choices, gift style choices, or crisis responses inside the same round, set advance_round=False.
-    Judge taste_match_delta conservatively by how well the choice fits the partner persona, relationship stage,
-    route flow, and situation. Gift choices should use expression-style options only: gift_quiet, gift_direct, gift_later, gift_together, gift_practical, or gift_note. Do not present a no-gift / just-pass option as a normal option.
-    Random crisis events do not change the score automatically; the user's response should be recorded with
-    crisis_handled or crisis_mishandled only when clearly appropriate. Do not expose the hidden score unless reveal_effect is returned.
+    Judge taste_match_delta conservatively by how well the choice fits the partner persona, relationship stage, route flow, and situation. 
+    Gift choices should use expression-style options only: gift_quiet, gift_direct, gift_later, gift_together, gift_practical, or gift_note. 
+    Do not present a no-gift / just-pass option as a normal option.
+    Random crisis events do not change the score automatically; the user's response should be recorded with crisis_handled or crisis_mishandled only when clearly appropriate. 
+    Do not expose the hidden score unless reveal_effect is returned.
     """,
     annotations={
         "title": "Record SumRoute Choice",
@@ -1411,11 +1407,9 @@ def _build_plan_b_suggestions(history: list[dict[str, Any]]) -> list[dict[str, A
     """
     Generate the final sumroute(썸루트) rehearsal report after all route rounds are complete.
     Use this only when game_over=True or all four rounds have been selected.
-    The response includes the user's selected_course, a one-line route summary, final grade,
-    best/worst choices, and Plan B suggestions.
+    The response includes the user's selected_course, a one-line route summary, final grade, best/worst choices, and Plan B suggestions.
     The assistant must first show the full selected course in order, then explain the result.
-    Do not invent precise expected costs. Instead, focus on route flow, chemistry, risk points,
-    and 'if you had chosen this Plan B, the score would have been higher' suggestions.
+    Do not invent precise expected costs. Instead, focus on route flow, chemistry, risk points, and 'if you had chosen this Plan B, the score would have been higher' suggestions.
     """,
     annotations={
         "title": "Get SumRoute Final Report",
