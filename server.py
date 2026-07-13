@@ -979,7 +979,7 @@ async def _search_places_for_round(
     name = "start_date",
     description = 
     """
-    Start a new 썸루트 date rehearsal session.
+    Start a new sumroute(썸루트) date rehearsal session.
     Use this first when the user wants to simulate a date course around a real meeting place.
     This tool stores the partner personality/taste, relationship stage, and meeting place, then returns
     the first route round. Do not call this tool until the assistant has collected all required inputs:
@@ -1050,7 +1050,7 @@ def start_date(
     name = "search_nearby",
     description = 
     """
-    Search real nearby places for the current 썸루트 round using Kakao Local API.
+    Search real nearby places for the current sumroute(썸루트) round using Kakao Local API.
 
     This tool is intentionally designed to reduce LLM prompt dependence. The assistant may pass
     a short optional query, but it does not need to craft every search keyword. The MCP server
@@ -1154,7 +1154,7 @@ async def search_nearby(
     name = "make_choice",
     description =
     """
-    Record the user's selected route step or mid-date action, then update the hidden date score.
+    Record the user's selected sumroute(썸루트) step or mid-date action, then update the hidden date score.
     Use this whenever the user chooses a place, activity, reply, gift style, or crisis response.
     For actual route steps, keep advance_round=True so the choice appears in the final selected course.
     For small dialogue choices, gift style choices, or crisis responses inside the same round, set advance_round=False.
@@ -1409,7 +1409,7 @@ def _build_plan_b_suggestions(history: list[dict[str, Any]]) -> list[dict[str, A
     name = "get_result",
     description =
     """
-    Generate the final 썸루트 rehearsal report after all route rounds are complete.
+    Generate the final sumroute(썸루트) rehearsal report after all route rounds are complete.
     Use this only when game_over=True or all four rounds have been selected.
     The response includes the user's selected_course, a one-line route summary, final grade,
     best/worst choices, and Plan B suggestions.
